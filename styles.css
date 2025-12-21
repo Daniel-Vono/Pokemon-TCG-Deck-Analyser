@@ -1,0 +1,42 @@
+p{
+    font-family: Roboto;
+    font-weight: bold;
+    text-align: center;
+}
+
+.spawn
+{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+@font-face {
+    font-family: unown;
+    src: url(Unown.ttf) format('truetype');
+}
+
+h1{
+    font-family: unown;
+    font-size: 35px;
+    text-align: center;
+}
+
+.decklist-grid{
+    display: grid;
+    justify-content: center;  
+}
+
+.decklist-textarea{
+    display: block;
+    font-size: 8px;
+    min-height: 400px;
+    min-width: 350px;
+}
+
+.stat-grid{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 50% 50%;
+    min-width: 0;
+    overflow-wrap: break-word;
+}
