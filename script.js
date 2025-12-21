@@ -32,10 +32,23 @@ setAbbreviationToTCGdex.set('PFL', "me02");
 setAbbreviationToTCGdex.set('ASC', "me02.5");
 //https://api.tcgdex.net/v2/en/cards/
 
+let numBasics = 0;
+let numS1s = 0;
+let numS2s = 0;
+let numSOther = 0;
+
+let numItems = 0;
+let numSupporters = 0;
+let numTools = 0;
+let numStadium = 0;
+
+let numEnergyB = 0;
+let numEnergyS = 0;
+
 function enterDeck()
 {
     var inputLines = decklistTextarea.value.split('\n');
-    console.log(inputLines);
+    /*console.log(inputLines);
 
     let cataStartIdxs = [0];
     cataStartIdxs.push(inputLines.indexOf("") + 1);
@@ -55,10 +68,12 @@ function enterDeck()
     localStorage.setItem("deckSize", cataVals[0] + cataVals[1] + cataVals[2]);
 
     console.log(localStorage.getItem("numPkmn"), localStorage.getItem("numTrainer"), localStorage.getItem("numEnergy"), localStorage.getItem("deckSize"));
-    
+    */
     (async () => 
     {
         await storeCardsInDeck(inputLines);
+
+        saveCardCategoryCounts();
 
         window.location.href = "stats.html";
     })();
@@ -77,7 +92,11 @@ async function storeCardsInDeck(inputLines)
             continue;
         }
 
-        deck.push(await parseCard(element));
+        card = await parseCard(element, firstChar);
+
+        updateCardCategoryCounts(card.category, Number(firstChar));
+
+        deck.push(card);
     }
     deck = deck.filter(card => card != null);
 
@@ -85,7 +104,7 @@ async function storeCardsInDeck(inputLines)
     localStorage.setItem("uniqueCardCount", deck.length);
 }
 
-async function parseCard(element)
+async function parseCard(element, quantity)
 {
     const tcgdex = new TCGdex('en');
 
@@ -113,9 +132,92 @@ async function parseCard(element)
         console.log("Error:", element);
     }
     
-    card.quantityInDeck = Number(firstChar);
+    card.quantityInDeck = Number(quantity);
     
     console.log(card.name);
 
     return card;
+}
+
+function updateCardCategoryCounts(category, count)
+{
+    switch(category)
+    {
+        case "Pokemon":
+            switch(card.stage)
+            {
+                case "Basic":
+                    numBasics += count;
+                    break;
+                
+                case "Stage1":
+                    numS1s += count;
+                    break;
+
+                case "Stage2":
+                    numS2s += count;
+                    break;
+
+                default:
+                    numSOther += count;
+                    break;
+            }
+            break;
+        
+        case "Trainer":
+            switch(card.trainerType)
+            {
+                case "Item":
+                    numItems += count;
+                    break;
+                
+                case "Supporter":
+                    numSupporters += count;
+                    break;
+
+                case "Tool":
+                    numTools += count;
+                    break;
+
+                case "Stadium":
+                    numStadium += count;
+                    break;
+            }
+            break;
+
+        case "Energy":
+            console.log(card.energyType);
+            switch(card.energyType)
+            {
+                case "Normal":
+                    numEnergyB += count;
+                    break;
+                
+                case "Special":
+                    numEnergyS += count;
+                    break;
+            }
+            break;
+    }
+}
+
+function saveCardCategoryCounts()
+{
+    localStorage.setItem("numBasics", numBasics);
+    localStorage.setItem("numS1s", numS1s);
+    localStorage.setItem("numS2s", numS2s);
+    localStorage.setItem("numSOther", numSOther);
+
+    localStorage.setItem("numItems", numItems);
+    localStorage.setItem("numSupporters", numSupporters);
+    localStorage.setItem("numTools", numTools);
+    localStorage.setItem("numStadium", numStadium);
+
+    localStorage.setItem("numEnergyB", numEnergyB);
+    localStorage.setItem("numEnergyS", numEnergyS);
+
+    localStorage.setItem("numPkmn", numBasics + numS1s + numS2s + numSOther);
+    localStorage.setItem("numTrainer", numItems + numSupporters + numTools + numStadium);
+    localStorage.setItem("numEnergy", numEnergyB + numEnergyS);
+    localStorage.setItem("deckSize", Number(localStorage.getItem("numPkmn")) + Number(localStorage.getItem("numTrainer")) + Number(localStorage.getItem("numEnergy")));
 }
