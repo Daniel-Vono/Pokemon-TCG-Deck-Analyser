@@ -14,11 +14,26 @@
 
         <div class="stat-grid">
             <div>
-                <canvas id="myChart"></canvas>
+                <canvas id="compPiChart"></canvas>
             </div>
-            <h3>Probability of mulligan</h3>
-            <h3>Probability of x in oppening hand if you have y coppies</h3>
-            <h3>Probability of mulligan</h3>
+            <div>
+                <!--TODO: Add vertical centering-->
+                <canvas id="basicOpenDistrib"></canvas>
+            </div>
+            <div>
+                <canvas id="muliDistrib"></canvas>
+            </div>
+            <div>
+                <p>Probability of prizing exactly <input type="number" value=0 min=0 max=4 id="prizedCopies"> copies of a card when <input type="number" value=4 min=0 max=4 id="totalCopies"> are played in the deck:</p>
+                <p>This card is a basic Pokemon: <input type="checkbox" id="isBasic"></p>
+                <p id="prizingOutput">__._%</p>
+            </div>
+            <div>
+                <p>Probability of being forced to start a basic of which there are <input type="number" value=1 min=1 max=4 id="startCopies"> copy/copies in the deck:</p>
+                <p id="startOutput">__._%</p>
+            </div>
+            <div>    
+            </div>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
