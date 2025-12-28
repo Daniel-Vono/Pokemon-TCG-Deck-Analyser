@@ -13,10 +13,6 @@
     <body bgcolor="lightyellow">
         <h1>Pokemon TCG Deck Analyser</h1>
 
-        <p>
-            Explaination and desc ...
-        </p>
-
         <div class="decklist-grid">
             <textarea class="decklist-textarea"></textarea>
 
@@ -24,6 +20,54 @@
             <button id="enterBtn" style="padding: 5px; margin-top: 5px;">Enter</button>
         </div>
 
+        <svg viewBox="0 0 40 40" class="spinner invisible">
+            <circle cx="20" cy="20" r="18"></circle>
+            <text x="20" y="20" 
+                text-anchor="middle" 
+                dominant-baseline="central" 
+                font-size="5" 
+                fill="black">
+                Loading...
+        </svg>
+        
+        <h2>Currently Supported Information</h2>
+        <ul>
+            <li>Deck Composition</li>
+            <li>Probabilitiy of openning with n basics</li>
+            <li>Probability of n mulligans occuring</li>
+            <li>Probability of prizing n copies of a card when m are played in the deck</li>
+            <li>Probability of a forced start</li>
+        </ul>
+
+        <h2>Currently Supported Sets</h2>
+        <p>
+            <strong>Scarlet & Violet Promos</strong> (SVP, ID: svp)<br>
+            <strong>Scarlet & Violet Energy</strong> (SVE, ID: hgss1)<br>
+            <strong>Scarlet & Violet Base Set</strong> (SVI, ID: sv01)<br>
+            <strong>Paldea Evolved</strong> (PAL, ID: sv02)<br>
+            <strong>Obsidian Flames</strong> (OBF, ID: sv03)<br>
+            <strong>Scarlet & Violet—151</strong> (MEW, ID: sv03.5)<br> 
+            <strong>Paradox Rift</strong> (PAR, ID: sv04)<br>
+            <strong>Paldean Fates</strong> (PAF, ID: sv04.5)<br> 
+            <strong>Temporal Forces</strong> (TEF, ID: sv05)<br>
+            <strong>Twilight Masquerade</strong> (TWM, ID: sv06)<br> 
+            <strong>Shrouded Fable</strong> (SFA, ID: sv06.5)<br>
+            <strong>Stellar Crown</strong> (SCR, ID: sv07)<br>
+            <strong>Surging Sparks</strong> (SSP, ID: sv08)<br>
+            <strong>Prismatic Evolutions</strong> (PRE, ID: sv08.5)<br>
+            <strong>Journey Together</strong> (JTG, ID: sv09)<br>
+            <strong>Destined Rivals</strong> (DRI, ID: sv10)<br>
+            <strong>Black Bolt</strong> (BLK, ID: sv10.5b)<br>
+            <strong>White Flare</strong> (WHT, ID: sv10.5w)<br>
+        </p>
+        <p>
+            <strong>Mega Evolution Promos</strong> (MEP, ID: mep)<br>
+            <strong>Mega Evolution Energy</strong> (MEE)<br>
+            <strong>Mega Evolution</strong> (MEG, ID: me01)<br>
+            <strong>Phantasmal Flames</strong> (PFL, ID: me02)<br>
+            <strong>Ascended Heros</strong> (ASC, ID: me02.5)<br>
+        </p>
+        
         <script src="https://cdn.jsdelivr.net/npm/@tcgdex/sdk@2/dist/tcgdex.browser.js"></script>
         <script src="script.js"></script>
     </body>

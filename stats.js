@@ -78,7 +78,7 @@ new Chart(ctx2, {
         plugins: {
             title: {
                 display: true,
-                text: 'Probability of oppening with n basics',
+                text: 'Probability of Oppening With n Basics',
 
                 font: {
                     size: 18,
@@ -110,7 +110,7 @@ new Chart(ctx3, {
         plugins: {
             title: {
                 display: true,
-                text: 'Probability of n mulligans occuring',
+                text: 'Probability of n Mulligans Occuring',
                 
                 font: {
                     size: 18,

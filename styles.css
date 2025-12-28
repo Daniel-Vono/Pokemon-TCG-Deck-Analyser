@@ -23,7 +23,7 @@ h1{
 
 .decklist-grid{
     display: grid;
-    justify-content: center;  
+    justify-content: center;
 }
 
 .decklist-textarea{
@@ -31,6 +31,64 @@ h1{
     font-size: 9px;
     min-height: 400px;
     min-width: 350px;
+}
+
+.invisible{
+    display: none !important;
+}
+
+.spinner{
+    display: block; 
+    height: 125px; 
+    margin: 0 auto;
+}
+
+.spinner circle{
+    fill: none;
+    stroke-width: 3;
+    stroke: black;
+    stroke-linecap: round;
+
+    animation: 
+            colour 6s ease-in-out infinite,
+            dash 1.5s ease-in-out infinite;
+}
+
+.spinner text{
+    fill: none;
+    stroke-width: 0.25;
+
+    animation: 
+            colour 6s ease-in-out infinite;
+}
+
+@keyframes colour {
+    0%, 100%{
+        stroke: rgb(255, 100, 130);
+    }
+    25%{
+        stroke: rgb(54, 160, 240);
+    }
+    50%{
+        stroke: rgb(255, 210, 90);
+    }
+    75%{
+        stroke: rgb(100, 100, 225);
+    }
+}
+@keyframes dash {
+    0%{
+        stroke-dasharray: 1,200;
+        stroke-dashoffset: 0;
+    }
+    50%{
+        stroke-dasharray: 89,200;
+        stroke-dashoffset: -35;
+    }
+    100%{
+        stroke-dasharray: 89,200;
+        stroke-dashoffset: -124;
+    }
 }
 
 .stat-grid{

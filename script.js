@@ -5,6 +5,8 @@ enterBtn.addEventListener("click", enterDeck);
 
 const decklistTextarea = document.getElementsByTagName("textarea")[0];
 
+const loadingContent = Array.from(document.getElementsByClassName("invisible"));
+
 const setAbbreviationToTCGdex = new Map();
 setAbbreviationToTCGdex.set('SVP', "svp");
 setAbbreviationToTCGdex.set('SVE', "hgss1");
@@ -45,8 +47,22 @@ let numStadium = 0;
 let numEnergyB = 0;
 let numEnergyS = 0;
 
+let canEnter = true;
+
+function toggleLoadingContent()
+{
+    for(let i = 0; i < loadingContent.length; i++)
+    {
+        loadingContent[i].classList.toggle("invisible");
+    }
+}
+
 function enterDeck()
 {
+    if (!canEnter) return;
+
+    toggleLoadingContent();
+
     var inputLines = decklistTextarea.value.split('\n');
     /*console.log(inputLines);
 
@@ -69,6 +85,9 @@ function enterDeck()
 
     console.log(localStorage.getItem("numPkmn"), localStorage.getItem("numTrainer"), localStorage.getItem("numEnergy"), localStorage.getItem("deckSize"));
     */
+
+    canEnter = false;
+
     (async () => 
     {
         await storeCardsInDeck(inputLines);
@@ -129,7 +148,10 @@ async function parseCard(element, quantity)
     let card = await tcgdex.fetch('cards', accessStr);
     if(card == null)
     {
-        console.log("Error:", element);
+        alert('Error: Unable to process "' + element + '"');
+        canEnter = true;
+        toggleLoadingContent();
+        return;
     }
     
     card.quantityInDeck = Number(quantity);
