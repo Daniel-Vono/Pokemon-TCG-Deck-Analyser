@@ -61,36 +61,23 @@ function enterDeck()
 {
     if (!canEnter) return;
 
-    toggleLoadingContent();
-
     var inputLines = decklistTextarea.value.split('\n');
-    /*console.log(inputLines);
 
-    let cataStartIdxs = [0];
-    cataStartIdxs.push(inputLines.indexOf("") + 1);
-    cataStartIdxs.push(inputLines.lastIndexOf("") + 1);
-
-    let cataVals = [];
-    for(let i = 0; i < 3; i++)
+    if(inputLines.length === 1 && inputLines[0] === "")
     {
-        let line = inputLines[cataStartIdxs[i]];
-        let strNum = line.substring(line.indexOf(" ") + 1);
-        cataVals.push(parseInt(strNum));
+        alert('Error: No decklist provided');
+        return;
     }
 
-    localStorage.setItem("numPkmn", cataVals[0]);
-    localStorage.setItem("numTrainer", cataVals[1]);
-    localStorage.setItem("numEnergy", cataVals[2]);
-    localStorage.setItem("deckSize", cataVals[0] + cataVals[1] + cataVals[2]);
-
-    console.log(localStorage.getItem("numPkmn"), localStorage.getItem("numTrainer"), localStorage.getItem("numEnergy"), localStorage.getItem("deckSize"));
-    */
+    toggleLoadingContent();
 
     canEnter = false;
 
     (async () => 
     {
-        await storeCardsInDeck(inputLines);
+        let result = await storeCardsInDeck(inputLines);
+
+        if(result == -1) return;
 
         saveCardCategoryCounts();
 
@@ -119,8 +106,19 @@ async function storeCardsInDeck(inputLines)
     }
     deck = deck.filter(card => card != null);
 
+    let numCardsInDeck = Number(localStorage.getItem("deckSize")); 
+    if(numCardsInDeck != 60)
+    {
+        alert('Error: Invalid deck. Contains ' + numCardsInDeck + ' card(s) instead of 60 cards');
+        canEnter = true;
+        toggleLoadingContent();
+        return -1;
+    }
+
     localStorage.setItem("deck", JSON.stringify(deck));
     localStorage.setItem("uniqueCardCount", deck.length);
+
+    return 0;
 }
 
 async function parseCard(element, quantity)

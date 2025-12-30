@@ -1,10 +1,18 @@
 p{
     font-family: Roboto;
-    font-weight: bold;
     text-align: center;
 }
 
-.spawn
+ul{
+    font-family: Roboto;
+}
+
+h2{
+    font-family: Roboto;
+    font-weight: bold;
+}
+
+.interactable:hover
 {
     text-decoration: underline;
     cursor: pointer;
@@ -29,7 +37,7 @@ h1{
 .decklist-textarea{
     display: block;
     font-size: 9px;
-    min-height: 400px;
+    min-height: 425px;
     min-width: 350px;
 }
 
