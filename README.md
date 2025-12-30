@@ -11,7 +11,7 @@ This is A website where you paste your Pokemon TCG decklist and it outputs proba
 | Abbreviation | Full Set Name | TCGdex ID |
 | :--- | :--- | :--- |
 | SVP | Scarlet & Violet Promos | svp |
-| SVE | Scarlet & Violet Energy | hgss1 |
+| SVE | Scarlet & Violet Energy |  |
 | SVI | Scarlet & Violet (Base Set) | sv01 |
 | PAL | Paldea Evolved | sv02 |
 | OBF | Obsidian Flames | sv03 |

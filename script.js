@@ -81,6 +81,15 @@ function enterDeck()
 
         saveCardCategoryCounts();
 
+        let numCardsInDeck = Number(localStorage.getItem("deckSize")); 
+        if(numCardsInDeck != 60)
+        {
+            alert('Error: Invalid deck. Contains ' + numCardsInDeck + ' card(s) instead of 60 cards');
+            canEnter = true;
+            toggleLoadingContent();
+            return -1;
+        }
+
         window.location.href = "stats.html";
     })();
 }
@@ -105,15 +114,6 @@ async function storeCardsInDeck(inputLines)
         deck.push(card);
     }
     deck = deck.filter(card => card != null);
-
-    let numCardsInDeck = Number(localStorage.getItem("deckSize")); 
-    if(numCardsInDeck != 60)
-    {
-        alert('Error: Invalid deck. Contains ' + numCardsInDeck + ' card(s) instead of 60 cards');
-        canEnter = true;
-        toggleLoadingContent();
-        return -1;
-    }
 
     localStorage.setItem("deck", JSON.stringify(deck));
     localStorage.setItem("uniqueCardCount", deck.length);
